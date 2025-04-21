@@ -1,21 +1,25 @@
-[gd_resource type="Resource" script_class="Inventory" load_steps=18 format=3 uid="uid://ccyfjbshqwjjt"]
+[gd_resource type="Resource" script_class="Inventory" load_steps=19 format=3 uid="uid://ccyfjbshqwjjt"]
 
 [ext_resource type="Script" uid="uid://2m8sg0k01pcj" path="res://scripts/inventory/inventorySlot.gd" id="2_hoxie"]
+[ext_resource type="Resource" uid="uid://c87kmv7d7i3o7" path="res://scripts/inventory/items/lifepot.tres" id="3_hoxie"]
 [ext_resource type="Script" uid="uid://goa7hvlpskir" path="res://scripts/inventory/inventory.gd" id="4_7jmqq"]
 
 [sub_resource type="Resource" id="Resource_3yld3"]
 script = ExtResource("2_hoxie")
-amount = 0
+item = ExtResource("3_hoxie")
+amount = 1
 metadata/_custom_type_script = "uid://2m8sg0k01pcj"
 
 [sub_resource type="Resource" id="Resource_hoxie"]
 script = ExtResource("2_hoxie")
-amount = 0
+item = ExtResource("3_hoxie")
+amount = 3
 metadata/_custom_type_script = "uid://2m8sg0k01pcj"
 
 [sub_resource type="Resource" id="Resource_5k0vv"]
 script = ExtResource("2_hoxie")
-amount = 0
+item = ExtResource("3_hoxie")
+amount = 5
 metadata/_custom_type_script = "uid://2m8sg0k01pcj"
 
 [sub_resource type="Resource" id="Resource_yk7cm"]

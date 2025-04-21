@@ -22,6 +22,15 @@ func insert(item: InventoryItem):
 			updated.emit()
 			return
 
+func removeSlot(inventorySlot: InventorySlot):
+	var index = slots.find(inventorySlot)
+	if index < 0: return
+	
+	slots[index] = InventorySlot.new()
+
+func insertSlot(index: int, inventorySlot: InventorySlot):
+	slots[index] = inventorySlot
+
 func hasItem(item_name: String) -> bool:
 	for slot in slots:
 		if slot.item and slot.item.name == item_name:
