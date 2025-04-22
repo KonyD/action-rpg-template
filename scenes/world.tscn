@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://dtianfilrcmv2"]
+[gd_scene load_steps=22 format=3 uid="uid://dtianfilrcmv2"]
 
 [ext_resource type="Script" uid="uid://bc02sthbjelgh" path="res://scripts/world.gd" id="1_4mrxx"]
 [ext_resource type="Texture2D" uid="uid://s1ee2hmb7oa3" path="res://assets/graphics/TilesetFloor.png" id="1_qfnet"]
@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://dtelsyyk5hbyu" path="res://scenes/hearts_container.tscn" id="7_i7141"]
 [ext_resource type="Script" uid="uid://bgo4xey3ueo57" path="res://scripts/canvas_layer.gd" id="10_q5onr"]
 [ext_resource type="PackedScene" uid="uid://bdtywl8aemoj" path="res://scenes/inventory_gui.tscn" id="11_e3hyu"]
+[ext_resource type="Script" uid="uid://dx7ru8wwqiuk5" path="res://scripts/day_night_cycle.gd" id="13_jhx03"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_xv5jv"]
 texture = ExtResource("1_qfnet")
@@ -1144,6 +1145,43 @@ sources/1 = SubResource("TileSetAtlasSource_3d54t")
 sources/2 = SubResource("TileSetAtlasSource_036b0")
 sources/3 = SubResource("TileSetScenesCollectionSource_w7kh3")
 
+[sub_resource type="Animation" id="Animation_o8fc1"]
+resource_name = "DayNightCycle"
+length = 24.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 4.96667, 7, 12, 14, 17, 19, 22, 24),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(0.121569, 0.133333, 0.2, 1), Color(0.870588, 0.741176, 0.490196, 1), Color(0.870588, 0.85098, 0.764706, 1), Color(1, 1, 1, 1), Color(0.94902, 0.996078, 0.733333, 1), Color(0.85098, 0.784314, 0.647059, 1), Color(0.529412, 0.572549, 0.760784, 1), Color(0.188235, 0.2, 0.25098, 1), Color(0.121569, 0.133333, 0.2, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_xo05s"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_dss4m"]
+_data = {
+&"DayNightCycle": SubResource("Animation_o8fc1"),
+&"RESET": SubResource("Animation_xo05s")
+}
+
 [node name="World" type="Node2D"]
 script = ExtResource("1_4mrxx")
 
@@ -1217,6 +1255,14 @@ offset_right = 266.0
 offset_bottom = 164.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+script = ExtResource("13_jhx03")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasModulate"]
+libraries = {
+&"": SubResource("AnimationLibrary_dss4m")
+}
 
 [connection signal="closed" from="CanvasLayer/InventoryGui" to="." method="_on_inventory_gui_closed"]
 [connection signal="opened" from="CanvasLayer/InventoryGui" to="." method="_on_inventory_gui_opened"]
