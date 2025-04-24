@@ -1,6 +1,7 @@
 extends Camera2D
 
 @export var tilemap: TileMap
+@export var follow_node: Node2D
 
 func _ready() -> void:
 	var mapRect = tilemap.get_used_rect()
@@ -10,3 +11,6 @@ func _ready() -> void:
 	print(worldSizeInPixels)
 	limit_right = worldSizeInPixels.x * tilemap_scale.x
 	limit_bottom = worldSizeInPixels.y * tilemap_scale.y
+
+func _process(delta: float) -> void:
+	global_position = follow_node.global_position

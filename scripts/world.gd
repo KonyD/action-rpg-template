@@ -1,9 +1,12 @@
-extends Node2D
+extends BaseScene
 
 @onready var heartsContainer = $CanvasLayer/HeartsContainer
-@onready var player: Player = $TileMap/Player
+@onready var camera = $FollowCamera
 
 func  _ready() -> void:
+	super()
+	camera.follow_node = player
+	
 	heartsContainer.setMaxHearts(player.maxHealth)
 	heartsContainer.updateHearts(player.currentHealth)
 	player.healthChanged.connect(heartsContainer.updateHearts)

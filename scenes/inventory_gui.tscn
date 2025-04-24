@@ -5,53 +5,62 @@
 [ext_resource type="PackedScene" uid="uid://bptu6hjo1ect4" path="res://scenes/slot_gui.tscn" id="2_akoca"]
 
 [node name="InventoryGui" type="Control"]
-custom_minimum_size = Vector2(532, 328)
+custom_minimum_size = Vector2(584, 368)
 layout_mode = 3
 anchors_preset = 0
-offset_right = 532.0
-offset_bottom = 328.0
+offset_right = 584.0
+offset_bottom = 368.0
 script = ExtResource("1_ba86g")
 
 [node name="NinePatchRect" type="NinePatchRect" parent="."]
 layout_mode = 0
-offset_right = 133.0
-offset_bottom = 82.0
-scale = Vector2(4, 4)
+offset_right = 135.0
+offset_bottom = 92.0
+scale = Vector2(4.32, 4)
 texture = ExtResource("1_2vb5y")
 patch_margin_left = 6
 patch_margin_top = 6
 patch_margin_right = 6
 patch_margin_bottom = 6
 
+[node name="HBoxContainer" type="HBoxContainer" parent="NinePatchRect"]
+custom_minimum_size = Vector2(116, 20)
+layout_mode = 0
+offset_left = 9.0
+offset_top = 8.0
+offset_right = 125.0
+offset_bottom = 28.0
+
+[node name="Slot" parent="NinePatchRect/HBoxContainer" instance=ExtResource("2_akoca")]
+layout_mode = 2
+
+[node name="Slot2" parent="NinePatchRect/HBoxContainer" instance=ExtResource("2_akoca")]
+layout_mode = 2
+
+[node name="Slot3" parent="NinePatchRect/HBoxContainer" instance=ExtResource("2_akoca")]
+layout_mode = 2
+
+[node name="Slot4" parent="NinePatchRect/HBoxContainer" instance=ExtResource("2_akoca")]
+layout_mode = 2
+
+[node name="Slot5" parent="NinePatchRect/HBoxContainer" instance=ExtResource("2_akoca")]
+layout_mode = 2
+
 [node name="GridContainer" type="GridContainer" parent="NinePatchRect"]
+custom_minimum_size = Vector2(116, 44)
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -58.0
-offset_top = -34.0
-offset_right = 58.0
-offset_bottom = 34.0
+offset_left = -58.5
+offset_top = -6.0
+offset_right = 57.5
+offset_bottom = 38.0
 grow_horizontal = 2
 grow_vertical = 2
 columns = 5
-
-[node name="Slot" parent="NinePatchRect/GridContainer" instance=ExtResource("2_akoca")]
-layout_mode = 2
-
-[node name="Slot2" parent="NinePatchRect/GridContainer" instance=ExtResource("2_akoca")]
-layout_mode = 2
-
-[node name="Slot3" parent="NinePatchRect/GridContainer" instance=ExtResource("2_akoca")]
-layout_mode = 2
-
-[node name="Slot4" parent="NinePatchRect/GridContainer" instance=ExtResource("2_akoca")]
-layout_mode = 2
-
-[node name="Slot5" parent="NinePatchRect/GridContainer" instance=ExtResource("2_akoca")]
-layout_mode = 2
 
 [node name="Slot6" parent="NinePatchRect/GridContainer" instance=ExtResource("2_akoca")]
 layout_mode = 2

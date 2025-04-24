@@ -7,7 +7,7 @@
 [ext_resource type="Script" uid="uid://dd6qiy6wifmkk" path="res://scripts/weapon.gd" id="4_tpg5x"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kpjcp"]
-size = Vector2(14, 4)
+size = Vector2(11.5, 4)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_v6fml"]
 radius = 7.5
@@ -376,6 +376,7 @@ _data = {
 z_index = 1
 y_sort_enabled = true
 scale = Vector2(4, 4)
+collision_layer = 9
 script = ExtResource("1_fmuf1")
 inventory = ExtResource("2_3li8b")
 

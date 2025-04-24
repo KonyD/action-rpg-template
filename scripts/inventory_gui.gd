@@ -7,7 +7,8 @@ var isOpen: bool = false
 
 @onready var inventory: Inventory = preload("res://scripts/inventory/playerInventory.tres")
 @onready var itemStackGuiClass = preload("res://scenes/itemStackGui.tscn")
-@onready var slots: Array = $NinePatchRect/GridContainer.get_children()
+@onready var hotbar_slots: Array = $NinePatchRect/HBoxContainer.get_children()
+@onready var slots: Array = hotbar_slots + $NinePatchRect/GridContainer.get_children()
 @onready var ninePatch: NinePatchRect = $NinePatchRect
 
 var itemInHand: ItemStackGui
