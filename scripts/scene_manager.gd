@@ -3,6 +3,7 @@ extends Node
 class_name SceneManager
 
 var player: Player
+var gui_elements: CanvasLayer
 var last_scene_name: String
 
 var scene_dir_path = "res://scenes/"

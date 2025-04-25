@@ -22,6 +22,7 @@ var isHurt: bool = false
 var isAttacking: bool = false
 
 func _ready() -> void:
+	inventory.use_item.connect(useItem)
 	effects.play("RESET")
 
 func handle_input() -> void:
@@ -90,5 +91,15 @@ func knockback(enemyVelocity: Vector2):
 	velocity = knockbackDirection
 	move_and_slide()
 
+func increaseHealth(amount: int) -> void:
+	currentHealth += amount
+	currentHealth = min(maxHealth, currentHealth)
+	
+	healthChanged.emit(currentHealth)
+
+func useItem(item: InventoryItem) -> void:
+	if not item.canBeUsed(self): return
+	item.use(self)
+	inventory.removeLastUsedItem()
 
 func _on_hurt_box_area_exited(area: Area2D) -> void: pass
