@@ -1,8 +1,11 @@
-[gd_scene load_steps=14 format=3 uid="uid://db0oogkkmoq0p"]
+[gd_scene load_steps=17 format=3 uid="uid://db0oogkkmoq0p"]
 
 [ext_resource type="Script" uid="uid://b4xfmjcno662i" path="res://scripts/slime.gd" id="1_ahq63"]
 [ext_resource type="Texture2D" uid="uid://blqyfcim2p72o" path="res://assets/graphics/Slime.png" id="1_rldp6"]
 [ext_resource type="Texture2D" uid="uid://hhokvntv7agg" path="res://assets/graphics/FX/Smoke.png" id="3_4h4y0"]
+[ext_resource type="Script" uid="uid://dmyjmoigj2udw" path="res://components/marker_movement_ai_component.gd" id="4_b58ev"]
+[ext_resource type="Script" uid="uid://dnp5erwhs0gf5" path="res://components/hurt_box_component.gd" id="5_e12yk"]
+[ext_resource type="Script" uid="uid://cb2c54f2qdomi" path="res://components/health_component.gd" id="6_bhme6"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ahq63"]
 radius = 4.0
@@ -342,7 +345,7 @@ libraries = {
 
 [node name="hurtBox" type="Area2D" parent="."]
 collision_layer = 0
-collision_mask = 4
+collision_mask = 16
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="hurtBox"]
 position = Vector2(0, -5)
@@ -356,4 +359,20 @@ position = Vector2(0, -11)
 texture = ExtResource("3_4h4y0")
 hframes = 6
 
+[node name="MarkerMovementAIComponent" type="Node" parent="." node_paths=PackedStringArray("healthComponent")]
+script = ExtResource("4_b58ev")
+healthComponent = NodePath("../HealthComponent")
+metadata/_custom_type_script = "uid://dmyjmoigj2udw"
+
+[node name="HurtBoxComponent" type="Node" parent="." node_paths=PackedStringArray("area2D")]
+script = ExtResource("5_e12yk")
+area2D = NodePath("../hurtBox")
+metadata/_custom_type_script = "uid://dnp5erwhs0gf5"
+
+[node name="HealthComponent" type="Node" parent="." node_paths=PackedStringArray("hurtBox")]
+script = ExtResource("6_bhme6")
+hurtBox = NodePath("../HurtBoxComponent")
+metadata/_custom_type_script = "uid://cb2c54f2qdomi"
+
 [connection signal="area_entered" from="hurtBox" to="." method="_on_hurt_box_area_entered"]
+[connection signal="died" from="HealthComponent" to="." method="is_dead"]

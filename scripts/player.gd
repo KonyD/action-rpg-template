@@ -40,19 +40,6 @@ func attack():
 	isAttacking = false
 	weapon.disable()
 
-func update_animation():
-	if isAttacking: return
-	if velocity.length() == 0:
-		animations.stop()
-	else:
-		var direction = "Down"
-		if velocity.x < 0: direction = "Left"
-		elif velocity.x > 0: direction = "Right"
-		elif velocity.y < 0: direction = "Up"
-		
-		animations.play("walk" + direction)
-		lastAnimDirection = direction
-
 func handleCollision():
 	for i in get_slide_collision_count():
 		var collision = get_slide_collision(i)
@@ -61,7 +48,6 @@ func handleCollision():
 
 func _physics_process(_delta: float) -> void:
 	handle_input()
-	update_animation()
 	move_and_slide()
 	if !isHurt:
 		for area in hurt_box.get_overlapping_areas():

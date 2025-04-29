@@ -1,32 +1,10 @@
 extends CharacterBody2D
 
-@export var speed = 20
-@export var limit = 0.5
-
-@export var endPoint: Marker2D
-
 @onready var animations = $AnimationPlayer
 
-var startPosition
-var endPosition
+@export var knockbackPower: int = 500
 
 var isDead: bool = false
-
-func _ready() -> void:
-	startPosition = position
-	# divided to 4 because of the scaling factor
-	endPosition = endPoint.global_position / Vector2(4, 4)
-
-func changeDirection():
-	var temp = endPosition
-	endPosition = startPosition
-	startPosition = temp
-
-func updateVelocity():
-	var moveDirection = (endPosition - position)
-	if moveDirection.length() < limit:
-		changeDirection()
-	velocity = moveDirection.normalized() * speed
 
 func updateAnimation():
 	if velocity.length() == 0:
@@ -42,15 +20,17 @@ func updateAnimation():
 
 func  _physics_process(_delta: float) -> void:
 	if isDead: return
-	updateVelocity()
-	move_and_slide()
 	updateAnimation()
 
-
-func _on_hurt_box_area_entered(area: Area2D) -> void:
-	if area == $hitBox: return
-	$hitBox.set_deferred("monitorable", false)
+func is_dead():
 	isDead = true
 	animations.play("death")
 	await animations.animation_finished
 	queue_free()
+
+
+# might use in future
+func knockback(enemyPosition: Vector2):
+	var knockbackDirection = (position - enemyPosition).normalized() * knockbackPower
+	velocity = knockbackDirection
+	move_and_slide()

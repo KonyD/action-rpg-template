@@ -1228,29 +1228,26 @@ layer_4/y_sort_enabled = true
 layer_4/z_index = 1
 layer_4/tile_data = PackedInt32Array(131114, 5, 0)
 
-[node name="Slime" parent="TileMap" node_paths=PackedStringArray("endPoint") instance=ExtResource("6_e3hyu")]
+[node name="Slime" parent="TileMap" instance=ExtResource("6_e3hyu")]
 position = Vector2(154, 104)
-endPoint = NodePath("Marker2D")
 
 [node name="Marker2D" type="Marker2D" parent="TileMap/Slime"]
 position = Vector2(0, 34)
 
-[node name="Slime2" parent="TileMap" node_paths=PackedStringArray("endPoint") instance=ExtResource("6_e3hyu")]
+[node name="Slime2" parent="TileMap" instance=ExtResource("6_e3hyu")]
 position = Vector2(476, 184)
-endPoint = NodePath("Marker2D")
 
 [node name="Marker2D" type="Marker2D" parent="TileMap/Slime2"]
 position = Vector2(-86, 1)
 
-[node name="Slime3" parent="TileMap" node_paths=PackedStringArray("endPoint") instance=ExtResource("6_e3hyu")]
+[node name="Slime3" parent="TileMap" instance=ExtResource("6_e3hyu")]
 position = Vector2(210, 230)
-endPoint = NodePath("Marker2D")
 
 [node name="Marker2D" type="Marker2D" parent="TileMap/Slime3"]
 position = Vector2(52, 14)
 
 [node name="Player" parent="." instance=ExtResource("4_7r4gi")]
-position = Vector2(3024, 216)
+position = Vector2(191, 224)
 
 [node name="FollowCamera" type="Camera2D" parent="." node_paths=PackedStringArray("tilemap")]
 position = Vector2(3024, 216)

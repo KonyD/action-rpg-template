@@ -82,6 +82,7 @@ move_selector={
 2d_physics/layer_2="Slime"
 2d_physics/layer_3="HitBox"
 2d_physics/layer_4="Triggers"
+2d_physics/layer_5="Player weapon"
 
 [rendering]
 
