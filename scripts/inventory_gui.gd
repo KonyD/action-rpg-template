@@ -12,14 +12,15 @@ var isOpen: bool = false
 @onready var ninePatch: NinePatchRect = $NinePatchRect
 
 var itemInHand: ItemStackGui
-var oldIndex: int = -1
-var locked: bool = false
+var oldIndex: int = -1 # Stores the index of the slot the item was taken from (for putting it back).
+var locked: bool = false # Prevents interactions while animations or other locked actions are in progress.
 
 func _ready() -> void:
 	connectSlots()
 	inventory.updated.connect(update)
 	update()
 
+# Connects each slot's pressed signal to the onSlotClicked function.
 func connectSlots():
 	for i in range(slots.size()):
 		var slot = slots[i]
@@ -29,6 +30,7 @@ func connectSlots():
 		callable = callable.bind(slot)
 		slot.pressed.connect(callable)
 
+# Updates the UI to reflect the current inventory state.
 func update():
 	for i in range(min(inventory.slots.size(), slots.size())):
 		var inventorySlot: InventorySlot = inventory.slots[i]
@@ -45,16 +47,19 @@ func update():
 		itemStackGui.inventorySlot = inventorySlot
 		itemStackGui.update()
 
+# Shows the inventory UI and emits the opened signal.
 func open():
 	visible = true
 	isOpen = true
 	opened.emit()
 
+# Hides the inventory UI and emits the closed signal.
 func close():
 	visible = false
 	isOpen = false
 	closed.emit()
 
+# Handles slot click interactions based on the current state.
 func onSlotClicked(slot):
 	if locked: return
 	
@@ -73,6 +78,7 @@ func onSlotClicked(slot):
 	
 	swapItems(slot)
 
+# Picks up an item from a slot.
 func takeItemFromSlot(slot):
 	itemInHand = slot.takeItem()
 	ninePatch.add_child(itemInHand)
@@ -80,6 +86,7 @@ func takeItemFromSlot(slot):
 	
 	oldIndex = slot.index
 
+# Places the item in hand into a slot.
 func insertItemInSlot(slot):
 	var item = itemInHand
 	
@@ -90,6 +97,7 @@ func insertItemInSlot(slot):
 	
 	oldIndex = -1
 
+# Swaps the item in hand with the item in a slot.
 func swapItems(slot):
 	var tempItem = slot.takeItem()
 	
@@ -99,6 +107,7 @@ func swapItems(slot):
 	ninePatch.add_child(itemInHand)
 	updateItemInHand()
 
+# Stacks the item in hand onto an item in a slot if they're the same type.
 func stackItems(slot):
 	var slotItem: ItemStackGui = slot.itemStackGui
 	var maxAmount = slotItem.inventorySlot.item.maxAmount
@@ -120,10 +129,12 @@ func stackItems(slot):
 	slotItem.update()
 	if itemInHand: itemInHand.update()
 
+# Updates the position of the item in hand to follow the mouse.
 func updateItemInHand():
 	if !itemInHand: return
 	itemInHand.global_position = get_global_mouse_position() - itemInHand.size / 2
 
+# Returns the item in hand to its original slot or an empty slot.
 func putItemBack():
 	locked = true
 	if oldIndex < 0:
@@ -142,6 +153,7 @@ func putItemBack():
 	insertItemInSlot(targetSlot)
 	locked = false
 
+# Handles input events, specifically for putting the item back on right-click.
 func  _input(event: InputEvent) -> void:
 	if itemInHand && !locked && Input.is_action_pressed("right_click"):
 		putItemBack()

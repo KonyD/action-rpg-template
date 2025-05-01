@@ -7,7 +7,7 @@
 size = Vector2(4, 10)
 
 [node name="sword" type="Area2D"]
-collision_layer = 4
+collision_layer = 16
 collision_mask = 0
 script = ExtResource("1_ciu6k")
 

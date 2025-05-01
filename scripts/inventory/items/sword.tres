@@ -1,11 +1,14 @@
-[gd_resource type="Resource" script_class="InventoryItem" load_steps=3 format=3 uid="uid://cs0kd5iwkud8p"]
+[gd_resource type="Resource" script_class="WeaponItem" load_steps=4 format=3 uid="uid://cs0kd5iwkud8p"]
 
-[ext_resource type="Script" uid="uid://ce3msg037m24v" path="res://scripts/inventory/inventoryItem.gd" id="1_rfo8l"]
+[ext_resource type="Script" uid="uid://cflnils7yq0nu" path="res://scripts/inventory/items/weapon_item.gd" id="1_8qcut"]
 [ext_resource type="Texture2D" uid="uid://ghrsdhxlp5wd" path="res://assets/graphics/Items/BigSword.png" id="2_qubyl"]
+[ext_resource type="PackedScene" uid="uid://bj2wflyvup20k" path="res://scenes/player/sword.tscn" id="3_0bxnh"]
 
 [resource]
-script = ExtResource("1_rfo8l")
+script = ExtResource("1_8qcut")
+weapon_class = ExtResource("3_0bxnh")
 name = "Sword"
 texture = ExtResource("2_qubyl")
 maxAmount = 1
+consumable = false
 metadata/_custom_type_script = "uid://ce3msg037m24v"

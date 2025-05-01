@@ -20,16 +20,19 @@ signal healthChanged
 var lastAnimDirection: String = "Down"
 var isHurt: bool = false
 var isAttacking: bool = false
+var equippedWeapon: bool = false
 
 func _ready() -> void:
 	inventory.use_item.connect(useItem)
+	inventory.equip_item.connect(equip_item)
+	inventory.unequip_item.connect(unequip_item)
 	effects.play("RESET")
 
 func handle_input() -> void:
 	var direction := Input.get_vector("left", "right", "up", "down")
 	velocity = direction * SPEED
 	
-	if Input.is_action_just_pressed("attack") and inventory.hasItem("Sword"):
+	if Input.is_action_just_pressed("attack") and equippedWeapon:
 		attack()
 
 func attack():
@@ -86,6 +89,15 @@ func increaseHealth(amount: int) -> void:
 func useItem(item: InventoryItem) -> void:
 	if not item.canBeUsed(self): return
 	item.use(self)
-	inventory.removeLastUsedItem()
+	
+	if item.consumable: inventory.removeLastUsedItem()
+
+func equip_item(item: InventoryItem) -> void:
+	equippedWeapon = true
+	item.equip(self)
+
+func unequip_item(item: InventoryItem) -> void:
+	equippedWeapon = false
+	item.unequip(self)
 
 func _on_hurt_box_area_exited(area: Area2D) -> void: pass

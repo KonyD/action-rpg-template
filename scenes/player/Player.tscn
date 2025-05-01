@@ -1,9 +1,8 @@
-[gd_scene load_steps=23 format=3 uid="uid://dwh0mfn58tjlg"]
+[gd_scene load_steps=22 format=3 uid="uid://dwh0mfn58tjlg"]
 
 [ext_resource type="Texture2D" uid="uid://bdwf7jolhtlsm" path="res://assets/graphics/NinjaGreen/SpriteSheet.png" id="1_6viuf"]
 [ext_resource type="Script" uid="uid://snqu63duwyuc" path="res://scripts/player.gd" id="1_fmuf1"]
 [ext_resource type="Resource" uid="uid://ccyfjbshqwjjt" path="res://scripts/inventory/playerInventory.tres" id="2_3li8b"]
-[ext_resource type="PackedScene" uid="uid://bj2wflyvup20k" path="res://scenes/player/sword.tscn" id="4_524rm"]
 [ext_resource type="Script" uid="uid://dd6qiy6wifmkk" path="res://scripts/weapon.gd" id="4_tpg5x"]
 [ext_resource type="Script" uid="uid://btf63kp3fiiyg" path="res://components/move_animation_component.gd" id="6_c3xxp"]
 
@@ -424,9 +423,6 @@ visible = false
 position = Vector2(6, 7)
 rotation = 2.0944
 script = ExtResource("4_tpg5x")
-
-[node name="sword" parent="weapon" instance=ExtResource("4_524rm")]
-collision_layer = 16
 
 [node name="MoveAnimationComponent" type="Node" parent="." node_paths=PackedStringArray("animations")]
 script = ExtResource("6_c3xxp")

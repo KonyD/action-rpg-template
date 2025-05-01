@@ -4,6 +4,8 @@ class_name Inventory
 
 signal updated
 signal use_item
+signal equip_item(item: InventoryItem)
+signal unequip_item(item: InventoryItem)
 
 @export var slots: Array[InventorySlot]
 var index_of_last_used_item: int = -1
@@ -38,9 +40,10 @@ func insertSlot(index: int, inventorySlot: InventorySlot):
 	slots[index] = inventorySlot
 	updated.emit()
 
-func hasItem(item_name: String) -> bool:
+# unused!
+func hasItem(item: InventoryItem) -> bool:
 	for slot in slots:
-		if slot.item and slot.item.name == item_name:
+		if slot.item == item:
 			return true
 	
 	return false
@@ -51,6 +54,16 @@ func useItemAtIndex(index: int) -> void:
 	var slot = slots[index]
 	index_of_last_used_item = index
 	use_item.emit(slot.item)
+
+func tabbedIntoIndex(index: int) -> void:
+	var item = slots[index].item
+	if not item: return
+	equip_item.emit(item)
+
+func tabbedOutOfIndex(index: int) -> void:
+	var item = slots[index].item
+	if not item: return
+	unequip_item.emit(item)
 
 func removeLastUsedItem() -> void:
 	if index_of_last_used_item < 0: return
