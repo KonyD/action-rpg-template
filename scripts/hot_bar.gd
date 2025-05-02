@@ -24,9 +24,9 @@ func move_selector():
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("use_item"):
 		var selected_item = inventory.slots[currrently_selected].item # Get the item in the currently selected slot
-		if selected_item.consumable == true:
+		if selected_item and selected_item.consumable == true:
 			inventory.useItemAtIndex(currrently_selected)
-		else: # If the item is not consumable, toggle its equipped state
+		elif selected_item and selected_item.consumable == false: # If the item is not consumable, toggle its equipped state
 			if selected_item.isEquiped():
 				inventory.tabbedOutOfIndex(currrently_selected) # Unequip the item.
 			else:
