@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://dtianfilrcmv2"]
+[gd_scene load_steps=30 format=3 uid="uid://dtianfilrcmv2"]
 
 [ext_resource type="Script" uid="uid://bc02sthbjelgh" path="res://scripts/world.gd" id="1_4mrxx"]
 [ext_resource type="Texture2D" uid="uid://s1ee2hmb7oa3" path="res://assets/graphics/TilesetFloor.png" id="1_qfnet"]
@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://dtelsyyk5hbyu" path="res://scenes/hearts_container.tscn" id="7_i7141"]
 [ext_resource type="PackedScene" uid="uid://n1oe17p16i8q" path="res://scenes/camp_fire.tscn" id="7_o8fc1"]
 [ext_resource type="Texture2D" uid="uid://c1fadgsihiwq8" path="res://assets/graphics/TilesetHouse.png" id="8_dss4m"]
+[ext_resource type="PackedScene" uid="uid://cyt5x4y2qrk5p" path="res://scenes/enemies/dragon.tscn" id="10_lakw3"]
 [ext_resource type="Script" uid="uid://bgo4xey3ueo57" path="res://scripts/canvas_layer.gd" id="10_q5onr"]
 [ext_resource type="PackedScene" uid="uid://bdtywl8aemoj" path="res://scenes/inventory_gui.tscn" id="11_e3hyu"]
 [ext_resource type="Script" uid="uid://dx7ru8wwqiuk5" path="res://scripts/day_night_cycle.gd" id="13_jhx03"]
@@ -738,6 +739,7 @@ texture = ExtResource("2_i7141")
 0:0/0 = 0
 0:0/0/y_sort_origin = 5
 0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-13.1312, 13.9283, -9.94279, 15.0191, 9.69107, 15.0191, 12.7956, 13.8444, 13.9703, 12.8375, 14.0542, 11.0755, 12.843, 8.42662, 0.355339, 7.00526, -12.9445, 8.02052, -13.9703, 10.8238, -13.9703, 12.9214)
+0:0/0/custom_data_0 = "obstacle"
 2:0/0 = 0
 3:0/0 = 0
 4:0/0 = 0
@@ -968,6 +970,7 @@ texture = ExtResource("2_i7141")
 7:12/0 = 0
 8:12/0 = 0
 8:12/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -3, -5, -6, -3, -7, 3, -7, 5, -6, 8, -3, 8, 4, 5, 7, -5, 7, -8, 4)
+8:12/0/custom_data_0 = "obstacle"
 9:12/0 = 0
 10:12/0 = 0
 11:12/0 = 0
@@ -1128,6 +1131,7 @@ texture = ExtResource("3_4mrxx")
 0:0/animation_frame_3/duration = 0.4
 0:0/0 = 0
 0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-5, -4, 5, -4, 7, -3, 8, 0.0473623, 8, 8, -8, 8, -8, 0.0473623, -7, -3)
+0:0/0/custom_data_0 = "obstacle"
 
 [sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_w7kh3"]
 resource_name = "Collectables"
@@ -1144,6 +1148,7 @@ texture = ExtResource("8_dss4m")
 0:0/0 = 0
 0:0/0/y_sort_origin = 10
 0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-15, 24, -15, 10, -1, 10, -1, 24, 26, 24, 30, 21, 31, 19, 31, 4, 32, -4, -32, -4, -31, 4, -31, 19, -30, 21, -26, 24)
+0:0/0/custom_data_0 = "obstacle"
 
 [sub_resource type="TileSet" id="TileSet_qp438"]
 physics_layer_0/collision_layer = 3
@@ -1155,6 +1160,8 @@ terrain_set_0/terrain_1/name = "dark sand"
 terrain_set_0/terrain_1/color = Color(0.222018, 0.394152, 0.881515, 1)
 terrain_set_0/terrain_2/name = "grass"
 terrain_set_0/terrain_2/color = Color(0.618127, 0, 0.033152, 1)
+custom_data_layer_0/name = "type"
+custom_data_layer_0/type = 4
 sources/0 = SubResource("TileSetAtlasSource_xv5jv")
 sources/1 = SubResource("TileSetAtlasSource_3d54t")
 sources/2 = SubResource("TileSetAtlasSource_036b0")
@@ -1246,8 +1253,11 @@ position = Vector2(210, 230)
 [node name="Marker2D" type="Marker2D" parent="TileMap/Slime3"]
 position = Vector2(52, 14)
 
+[node name="Dragon" parent="TileMap" instance=ExtResource("10_lakw3")]
+position = Vector2(619.25, 144)
+
 [node name="Player" parent="." instance=ExtResource("4_7r4gi")]
-position = Vector2(191, 224)
+position = Vector2(165, 224)
 
 [node name="FollowCamera" type="Camera2D" parent="." node_paths=PackedStringArray("tilemap")]
 position = Vector2(3024, 216)

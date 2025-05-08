@@ -24,6 +24,16 @@ scene_manager="*res://scripts/scene_manager.gd"
 window/size/viewport_height=640
 window/stretch/mode="viewport"
 
+[file_customization]
+
+folder_colors={
+"res://assets/": "teal",
+"res://components/": "yellow",
+"res://scenes/": "orange",
+"res://scripts/": "blue",
+"res://scripts/inventory/": "red"
+}
+
 [input]
 
 toggle_inventory={
