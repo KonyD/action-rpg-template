@@ -13,7 +13,7 @@ signal healthChanged
 @export var maxHealth = 3 * 4
 @onready var currentHealth: int = maxHealth
 
-@export var knockbackPower: int = 500
+@export var knockbackPower: int = 500 
 
 @export var inventory: Inventory
 
@@ -21,14 +21,17 @@ var lastAnimDirection: String = "Down"
 var isHurt: bool = false
 var isAttacking: bool = false
 var equippedWeapon: bool = false
+var canMove: bool = true
 
 func _ready() -> void:
 	inventory.use_item.connect(useItem)
 	inventory.equip_item.connect(equip_item)
 	inventory.unequip_item.connect(unequip_item)
+	DialogueManager.dialogue_ended.connect(_on_dialogue_ended)
 	effects.play("RESET")
 
 func handle_input() -> void:
+	if not canMove: return
 	var direction := Input.get_vector("left", "right", "up", "down")
 	velocity = direction * SPEED
 	
@@ -50,8 +53,9 @@ func handleCollision():
 		print_debug(collider.name)
 
 func _physics_process(_delta: float) -> void:
-	handle_input()
-	move_and_slide()
+	if canMove:
+		handle_input()
+		move_and_slide()
 	if !isHurt:
 		for area in hurt_box.get_overlapping_areas():
 			if area.name == "hitBox":
@@ -101,3 +105,10 @@ func unequip_item(item: InventoryItem) -> void:
 	item.unequip(self)
 
 func _on_hurt_box_area_exited(area: Area2D) -> void: pass
+
+func _on_dialogue_started() -> void:
+	velocity = Vector2.ZERO
+	canMove = false
+
+func _on_dialogue_ended(data):
+	canMove = true

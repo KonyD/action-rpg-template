@@ -1,0 +1,80 @@
+[gd_scene load_steps=8 format=3 uid="uid://edf5v1su182v"]
+
+[ext_resource type="Texture2D" uid="uid://uajlavvhmlbn" path="res://assets/gui/InventoryRect.png" id="1_cr101"]
+[ext_resource type="Script" uid="uid://covcvksbtmqsy" path="res://scripts/settings_menu.gd" id="1_wswnh"]
+[ext_resource type="FontFile" uid="uid://df5xgkfydsjql" path="res://assets/fonts/NormalFont.ttf" id="2_wswnh"]
+[ext_resource type="Texture2D" uid="uid://bcw2o3gb2fbh4" path="res://assets/gui/checked.png" id="4_lwwgp"]
+[ext_resource type="Texture2D" uid="uid://bl4abr7s74x0v" path="res://assets/gui/unchecked.png" id="5_bgjg7"]
+[ext_resource type="Texture2D" uid="uid://cnjgcwj8rfyj6" path="res://assets/gui/h_slidder_grabber.png" id="6_48ojb"]
+[ext_resource type="Texture2D" uid="uid://cmarxsqlv2b2" path="res://assets/gui/h_slidder_grabber_hover.png" id="7_n35ux"]
+
+[node name="SettingsMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 896.0
+offset_bottom = 448.0
+script = ExtResource("1_wswnh")
+bus_name = "Master"
+
+[node name="NinePatchRect" type="NinePatchRect" parent="."]
+layout_mode = 0
+offset_right = 224.0
+offset_bottom = 112.0
+scale = Vector2(4, 4)
+texture = ExtResource("1_cr101")
+patch_margin_left = 6
+patch_margin_top = 6
+patch_margin_right = 6
+patch_margin_bottom = 6
+
+[node name="VBoxContainer" type="VBoxContainer" parent="NinePatchRect"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 216.0
+offset_bottom = 102.0
+theme_override_constants/separation = -3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="NinePatchRect/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="FullscreenLabel" type="Label" parent="NinePatchRect/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_wswnh")
+theme_override_font_sizes/font_size = 9
+text = "Fullscreen:"
+vertical_alignment = 1
+
+[node name="FullscreenCheckBox" type="CheckBox" parent="NinePatchRect/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+focus_mode = 0
+theme_override_constants/outline_size = 0
+theme_override_fonts/font = ExtResource("2_wswnh")
+theme_override_font_sizes/font_size = 9
+theme_override_icons/checked = ExtResource("4_lwwgp")
+theme_override_icons/unchecked = ExtResource("5_bgjg7")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="NinePatchRect/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 1
+
+[node name="VolumeLabel" type="Label" parent="NinePatchRect/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_wswnh")
+theme_override_font_sizes/font_size = 9
+text = "Volume:"
+vertical_alignment = 1
+
+[node name="VolumeSlider" type="HSlider" parent="NinePatchRect/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_icons/grabber = ExtResource("6_48ojb")
+theme_override_icons/grabber_highlight = ExtResource("7_n35ux")
+max_value = 1.0
+step = 0.001
+value = 1.0
+
+[connection signal="toggled" from="NinePatchRect/VBoxContainer/HBoxContainer/FullscreenCheckBox" to="." method="_on_fullscreen_check_box_toggled"]
+[connection signal="value_changed" from="NinePatchRect/VBoxContainer/VBoxContainer/VolumeSlider" to="." method="_on_volume_slider_value_changed"]

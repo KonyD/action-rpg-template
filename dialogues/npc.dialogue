@@ -1,0 +1,25 @@
+~ start
+Old Man: [[Ah|Oh|Hm]], a traveler... It's been ages since someone passed through these woods.
+Old Man: You look tired. The forest tests everyone. Even the strong.
+Old Man: Tell me, what brings you here?
+- I'm looking for someone.
+	Old Man: Someone? [[A friend?|A foe?|Family, perhaps?]]
+	Old Man: Either way, the woods keep secrets well. Too well.
+- I'm just exploring.
+	Old Man: [[Curious one, eh?|Heh, brave or foolish, I can't say.]]
+	Old Man: Tread carefully. Not everything here welcomes company.
+- I'm lost.
+	Old Man: Lost? [[Aren't we all, in a way?|This forest is good at that.]]
+	Old Man: Follow the moss on the stones. It may guide you.
+- Never mind.
+	Old Man: Hah, cautious. A wise trait.
+Old Man: Would you like some advice?
+- Yes, please.
+	Old Man: Listen to the birds. When they go quiet, danger follows.
+- No thanks.
+	Old Man: As you wish. Wisdom offered but not taken still lingers.
+- Who are you?
+	Old Man: Me? Just an old root too stubborn to leave this forest behind.
+Old Man: Perhaps we'll meet again, traveler. Or perhaps not.
+- Ask again => start
+- Leave => END

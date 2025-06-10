@@ -1,0 +1,87 @@
+[gd_scene load_steps=11 format=3 uid="uid://uhyd8tc2r32a"]
+
+[ext_resource type="Script" uid="uid://o2jeyaryhytx" path="res://scripts/npc.gd" id="1_nh2m4"]
+[ext_resource type="Resource" uid="uid://bathwy3j0nt3w" path="res://dialogues/npc.dialogue" id="2_rv78h"]
+[ext_resource type="Texture2D" uid="uid://dxm6hy8h0x6y0" path="res://assets/graphics/OldMan/SpriteSheet.png" id="3_rv78h"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rv78h"]
+atlas = ExtResource("3_rv78h")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7n8xq"]
+atlas = ExtResource("3_rv78h")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4wlns"]
+atlas = ExtResource("3_rv78h")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tl2vt"]
+atlas = ExtResource("3_rv78h")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_hwkja"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rv78h")
+}],
+"loop": true,
+"name": &"lookDown",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7n8xq")
+}],
+"loop": true,
+"name": &"lookLeft",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4wlns")
+}],
+"loop": true,
+"name": &"lookRight",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tl2vt")
+}],
+"loop": true,
+"name": &"lookUp",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_tl2vt"]
+radius = 9.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4wlns"]
+size = Vector2(14, 7)
+
+[node name="NPC" type="StaticBody2D" node_paths=PackedStringArray("area")]
+z_index = 1
+y_sort_enabled = true
+collision_layer = 32
+script = ExtResource("1_nh2m4")
+area = NodePath("Area2D")
+dialogue_res = ExtResource("2_rv78h")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -1)
+sprite_frames = SubResource("SpriteFrames_hwkja")
+animation = &"lookDown"
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, 4)
+shape = SubResource("CircleShape2D_tl2vt")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 3.5)
+shape = SubResource("RectangleShape2D_4wlns")
+debug_color = Color(0.8139, 0.181171, 0.889054, 0.42)
