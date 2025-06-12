@@ -1326,6 +1326,11 @@ offset_bottom = 224.0
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="CanvasLayer"]
+stream = ExtResource("20_2lf6f")
+autoplay = true
+parameters/looping = true
+
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 script = ExtResource("13_jhx03")
 
@@ -1348,11 +1353,6 @@ shape = SubResource("RectangleShape2D_lakw3")
 
 [node name="InsideHouse" type="Marker2D" parent="EntranceMarkers"]
 position = Vector2(2688, 302)
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("20_2lf6f")
-autoplay = true
-parameters/looping = true
 
 [connection signal="dialogue_started" from="TileMap/NPC" to="Player" method="_on_dialogue_started"]
 [connection signal="closed" from="CanvasLayer/InventoryGui" to="." method="_on_gui_element_closed"]
