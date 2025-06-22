@@ -11,3 +11,5 @@ This is a Godot 4.4+ template for creating Action RPG (ARPG) games. It provides 
 
 
 Feel free to use and modify this template for your own ARPG projects!
+
+**I would be really happy if you give any feedback or make a commit to improve this template!**
